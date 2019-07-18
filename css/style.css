@@ -1,0 +1,327 @@
+
+/* special lectures in this courses                        
+ 
+ 1. part 3: video 16,17,18 
+ 2.part 5: video 033
+ 
+ */
+ 
+ 
+ /* style elements in th same order as in html document */
+ /*
+ colors:
+ light green : #7ed56f
+ medium greeen : #55c57a
+ dark green: #28b485
+ */
+ /* browser set default margin for elements like h1 and others */ 
+ *,*::after,*::before{
+     margin: 0;
+     padding:0;
+     box-sizing: inherit;//evert elements inherit boxSizing from body
+     
+ }
+
+  html{
+      font-size:63.5%; //63.5% of default fontsize which is 16px
+  }
+body{  /*body is parent html element*/
+  
+    font-family: "lato", sans-serif;
+    font-weight: 400;
+   // font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 3rem;
+    box-sizing: border-box;
+} 
+.header{
+  height:95vh ;
+  background-image:linear-gradient(to right bottom,rgba(126,213,111,0.8),rgba(40,180,131,0.8)), url(../images/2.jpg);
+  background-size: cover;
+  background-position:top;
+  //clip-path: polygon(x y, x y, x y, x y);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+}
+
+.header__logo-box{
+position: absolute;
+top: 4rem;
+left: 4rem;
+}
+.header__logo{
+height: 3.5rem ;
+}
+ .header__text-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+ }
+.heading-primary{
+color: #fff;
+text-transform: uppercase;
+backface-visibility: hidden;
+margin-bottom: 6rem;
+}
+
+.heading-primary--main{
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  /* for animation to work we need to specify at least 2 properties such as animation name and animation-duration */
+  animation: moveInleft;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  /* 
+  other animation properties
+  animation-delay:
+  animation -iteration-count: how many time animation occur
+*/
+  
+}
+
+.heading-primary--sub{
+    display: block;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-in;/* shorthand property */
+    
+}
+/* CSS ANIMATION  */
+
+/*animation is changing value of css property in certain time */
+/* 2 types of animation are: 
+1.transition
+2.keyframe at-rule
+*/
+
+@keyframes moveInleft {
+  0% {   /* at start of animation */
+   opacity:0;
+   transform: translateX(-10rem);
+  }
+
+  80%{
+      transform: translateX(2rem); /* intermediate position */
+  }
+  100%{   /* at the end of animation */
+   opacity: 1;
+   transform: translate(0); /* original position */  
+} 
+
+}
+@keyframes moveInRight   {
+    0% {   /* at start of animation */
+     opacity:0;
+     transform: translate(10rem);
+    }
+  
+    80%{
+        transform: translate(-1rem); /* intermediate position */
+    }
+    100%{   /* at the end of animation */
+     opacity: 1;
+     transform: translate(0);   
+  } 
+  
+  }
+  /* animation will not happen only when page is load it can happen also when we hover see ex below  */
+  .logo:hover{
+    animation: moveInRight 1s ease-in;  
+  }
+  .btn:link,
+  .btn:visited{
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1.5rem 4rem;
+      display: inline-block;
+      border-radius: 10rem;
+      transition: all .2s; /* transition appear in initial state */
+      position: relative;
+      font-size: 1.6rem;
+  }  
+
+  .btn:hover{ /* hover is pseudo class which specify state of htl element */
+      transform: translateY(-3px);/* negative value is to move up in Y direction */
+     box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);    }
+   .btn:active{
+      transform: translateY(-1px);
+      box-shadow: 0   .5rem 1rem rgba(0,0,0,0.2);
+  }
+  .btn--white{
+      background-color: #fff;
+      color: #777; 
+  }
+  /* pseudo elements allow us to style certain parts of an element 
+   :: after pseudo element acts like a virtual element lie after element w are selecting we can style that virtual element
+  */
+
+  .btn::after {     /*after pseudo element treated like child of button */
+     content: "";/* necessary to specify content property of pseudo element and it may be empty */
+      display: inline-block;
+      height:100%;
+      width: 100%;
+      border-radius: 10rem;
+     position: absolute;
+     top: 0;
+     left: 0;
+     z-index: -1;
+     transition: all .4s;  
+  }
+  
+  .btn--white::after {
+   background-color:#ffe; 
+  }
+
+  .btn:hover::after{
+      transform: scaleX(1.4) scaleY(1.6);/* scale used to increase or decrease object here it incease orginal object by *1.5 */
+      opacity:0;
+  }
+  @keyframes moveInButton{
+      0%{
+       
+          opacity:0;
+         transform: translateY(3rem);
+      }
+      100%{
+        opacity:1;
+        transform: translateY(0;)
+      }
+  }
+  .btn--animated{
+    animation: moveInButton;
+      animation-duration: .5s;
+      animation-timing-function: ease-out;
+      animation-delay: .75s;
+      /* shortahand animation property 
+      animation: moveInButton .5s ease-out .75s
+      
+      */
+      animation-fill-mode: backwards;/* automatically apply 0% styles in @keyframe before animation of element start */
+  }
+/* styling section about */
+.section-about{
+    background-color:#f7f7f7;
+    padding: 25rem 0;
+    margin-top: -20vh;
+    //overflow-x: hidden;
+}
+/* typography */
+.heading-secondary{
+    font-size:3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display:inline-block;
+    background-image: linear-gradient(to right,#7ed56f,#28b485);
+    -webkit-background-clip: text; /*clip backgroungImage so that it appear to text */
+    color: transparent; /* make text color transparent so that linear gradientColor is seen to the text */
+    letter-spacing: .2rem;
+    transition: all .2s; 
+}
+.heading-secondary:hover{
+  transform: skewy(2deg) skewX(15deg); 
+  text-shadow: .5rem 1rem 2rem rgba(0,0,0,.2);
+}
+
+.heading-tertiary{
+font-size:1.6rem;
+font-weight: 700;
+text-transform: uppercase;
+}
+.paragraph{
+    font-size:1.6rem;
+}
+
+/* utility class to center text inside it and setting margin*/
+.u-center-text{
+    text-align:center; 
+}
+
+.u-margin-bottom-8{
+  margin-bottom: 8rem;   
+}
+
+.u-margin-bottom-2{
+    margin-bottom: 1.5rem    
+}
+/* designing flot layout */
+.row{
+    max-width: 114rem;
+    background-color: #eee;
+    margin: 0 auto;
+     
+}
+
+.col-1of-2{
+    display: inline-block;
+    width:calc((100% - 6rem)/2);
+     
+    float:left;
+}
+.col-1of-2:not(:last-child){
+    margin-right: 6rem;
+
+}
+
+.btn-text:link, .btn-text:visited{
+ font-size: 1.6rem;
+color: #55c57a;
+display: inline-block;
+text-decoration: none;
+border-bottom: 1px solid #55c57a; // so that we can set padding btn text and line
+padding: 3px;
+transition: all .2s;
+}
+.btn-text:hover{
+ background-color:#55c57a;
+ color: #fff;
+ box-shadow: 0 1rem 2rem rgba(0,0,0,.15);
+  transform: translateY(-2px);
+}
+.btn-text:active{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    transform: translateY(0);
+}
+/* style overlaped pictures */
+.composition{
+    position: relative;
+}
+.composition__photo{
+    width: 55%;
+    box-shadow: 0 1.5em 4rem rgba(0,0,0,.4);
+    border-radius: 2px;
+    position: absolute;
+    z-index:10 ;/*set Zindex for allphotos*/
+    transition: all .2s;
+    outline-offset: 2rem; //work like padding in borders
+}
+.composition__phto--p1{
+    right: 0;
+    top: 2rem;
+}
+.composition__phto--p2{
+    left: 0;
+    top: -2rem;
+}
+.composition__phto--p3{
+    left: 20% ;
+    top: 10rem  ;
+}
+.composition__photo:hover{
+    outline: 1.5rem  solid #55c57a;
+    
+    transform: scale(1.5) translateY(-.5rem);
+    box-shadow: 0 2.5rem 4rem rgba(0,0,0,.5);// big shasow must have much opacity
+    z-index: 20;
+}
+
+.composition:hover .composition__photo:not(:hover){
+
+    transform: scale(.95);
+}
+/* styling features section */
